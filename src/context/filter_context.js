@@ -1,4 +1,6 @@
 import React, {useContext, useReducer, useEffect} from "react";
+import { SETVIEW, UPDATE_FILTERS, FILTER_PRODUCTS } from "../actions";
+import filter_reducer from '../reducers/filter_reducer';
 
 const FilterContext = React.createContext();
 
@@ -71,42 +73,35 @@ const filterInitialState = {
 
 export const FilterProvider = ({children}) => {
 
-    const [store, setStore] = React.useState(filterInitialState);
+    const [state, dispatch] = React.useReducer(filter_reducer, filterInitialState);
+
+    useEffect(() => {
+        dispatch({type: FILTER_PRODUCTS});
+    }, [state.filters])
 
     const updateFilters = (e) => {
         let name = e.target.name;
         let value = e.target.value;
         if(name === "category") {
             value = e.target.textContent;
-            if(value !== "All") {
-                const filteredProducts = store.all_products.filter( e => e.name === value);
-                setStore( preState => {
-                    return {...preState, filtered_products: [...filteredProducts]};
-                })
-            } else {
-                const filteredProducts = [...store.all_products];
-                setStore( preState => {
-                    return {...preState, filtered_products: [...filteredProducts]};
-                })
-            }
         }
+
+        dispatch({type: UPDATE_FILTERS, payload: {name, value}})
 
         console.log("FilterProvider.updateFilters", name, value);
     }
 
     const setViewType = (viewType) => {
-        setStore(store => {
-            return {...store, view: viewType};
-        })
+        dispatch({type: SETVIEW, payload: viewType});
     }
 
     const updateSort = (sortType) => {
-        
+
     }
 
     return (
         <FilterContext.Provider value = {{
-            ...store,
+            ...state,
             updateFilters,
             setViewType,
             updateSort
