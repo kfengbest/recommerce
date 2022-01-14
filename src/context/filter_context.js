@@ -100,11 +100,16 @@ export const FilterProvider = ({children}) => {
         })
     }
 
+    const updateSort = (sortType) => {
+        
+    }
+
     return (
         <FilterContext.Provider value = {{
             ...store,
             updateFilters,
-            setViewType
+            setViewType,
+            updateSort
         }}>
             {children}
         </FilterContext.Provider>
