@@ -2,13 +2,49 @@ import React, {useContext, useReducer, useEffect} from "react";
 
 const FilterContext = React.createContext();
 
-export const FilterProvider = ({children}) => {
-
-    const filters = {
+const filterInitialState = {
+    all_products: [],
+    filtered_products: [
+        {
+            id: 1,
+            name: "kitchen",
+            price: "$123",
+            imageUrl: ""
+        },
+        {
+            id: 2,
+            name: "chair",
+            price: "$87",
+            imageUrl: ""
+        },
+        {
+            id: 3,
+            name: "desk",
+            price: "$56",
+            imageUrl: ""
+        },
+        {
+            id: 4,
+            name: "room",
+            price: "$23",
+            imageUrl: ""
+        }
+    ],
+    view: "grid",
+    sort: "price-lowest",
+    filters : {
         searchText: "",
-        category: "",
-        company: ""
-    };
+        category: "all",
+        company: "all",
+        color: "all",
+        min_price: 0,
+        max_price: 0,
+        price: 0,
+        shipping: false,
+    }
+}
+
+export const FilterProvider = ({children}) => {
 
     const updateFilters = (e) => {
         let name = e.target.name;
@@ -21,7 +57,7 @@ export const FilterProvider = ({children}) => {
 
     return (
         <FilterContext.Provider value = {{
-            filters,
+            ...filterInitialState,
             updateFilters
         }}>
             {children}

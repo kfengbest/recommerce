@@ -2,40 +2,18 @@ import * as React from 'react';
 import styled from "styled-components";
 import GridView from '../components/GridView';
 import Filters from '../components/Filters';
+import { useFilterContext } from '../context/filter_context';
 
-const productslist = [
-    {
-        id: 1,
-        name: "arm",
-        price: "$123",
-        imageUrl: ""
-    },
-    {
-        id: 2,
-        name: "chair",
-        price: "$87",
-        imageUrl: ""
-    },
-    {
-        id: 3,
-        name: "desk",
-        price: "$56",
-        imageUrl: ""
-    },
-    {
-        id: 4,
-        name: "room",
-        price: "$23",
-        imageUrl: ""
-    }
-];
 function Products() {
+
+    const {filtered_products : pruducts} = useFilterContext();
+
     return (
         <>
             <Wrapper>
                 <div className="section-center products">
                     <Filters />
-                    <GridView products={productslist} />
+                    <GridView products={pruducts} />
                 </div>
             </Wrapper>
         </>
