@@ -2,6 +2,7 @@ import * as React from 'react';
 import styled from "styled-components";
 import Filters from '../components/Filters';
 import ProductList from '../components/ProductList';
+import Sort from '../components/Sort';
 import { useFilterContext } from '../context/filter_context';
 
 function Products() {
@@ -13,7 +14,10 @@ function Products() {
             <Wrapper>
                 <div className="section-center products">
                     <Filters />
-                    <ProductList />
+                    <div>
+                        <Sort />
+                        <ProductList />
+                    </div>
                 </div>
             </Wrapper>
         </>

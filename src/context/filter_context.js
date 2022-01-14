@@ -94,10 +94,17 @@ export const FilterProvider = ({children}) => {
         console.log("FilterProvider.updateFilters", name, value);
     }
 
+    const setViewType = (viewType) => {
+        setStore(store => {
+            return {...store, view: viewType};
+        })
+    }
+
     return (
         <FilterContext.Provider value = {{
             ...store,
-            updateFilters
+            updateFilters,
+            setViewType
         }}>
             {children}
         </FilterContext.Provider>
