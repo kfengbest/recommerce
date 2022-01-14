@@ -19,7 +19,7 @@ const filter_reducer = (state, action) => {
             const {searchText, category, company, color, price, shipping} = state.filters;
 
             let tempProducts = [...all_products];
-            if(category !== "all") {
+            if(category !== "All") {
                 tempProducts = tempProducts.filter( p => p.name === category);
             }
             return {...state, filtered_products : tempProducts};
