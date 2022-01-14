@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from "styled-components";
-import GridView from '../components/GridView';
 import Filters from '../components/Filters';
+import ProductList from '../components/ProductList';
 import { useFilterContext } from '../context/filter_context';
 
 function Products() {
@@ -13,7 +13,7 @@ function Products() {
             <Wrapper>
                 <div className="section-center products">
                     <Filters />
-                    <GridView products={pruducts} />
+                    <ProductList />
                 </div>
             </Wrapper>
         </>
