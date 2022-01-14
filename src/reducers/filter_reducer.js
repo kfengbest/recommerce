@@ -1,11 +1,15 @@
 import {
     UPDATE_FILTERS,
     SETVIEW,
-    FILTER_PRODUCTS
+    FILTER_PRODUCTS,
+    LOAD_PRODUCTS
 } from '../actions'
 
 const filter_reducer = (state, action) => {
     switch(action.type) {
+        case LOAD_PRODUCTS : {
+            return {...state, all_products: [...action.payload], filtered_products: [...action.payload]};
+        }
         case UPDATE_FILTERS : {
             const {name, value} = action.payload;
             return {...state, filters : {...state.filters, [name] : value}};

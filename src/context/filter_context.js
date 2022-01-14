@@ -1,62 +1,13 @@
 import React, {useContext, useReducer, useEffect} from "react";
-import { SETVIEW, UPDATE_FILTERS, FILTER_PRODUCTS } from "../actions";
+import { SETVIEW, UPDATE_FILTERS, FILTER_PRODUCTS, LOAD_PRODUCTS} from "../actions";
 import filter_reducer from '../reducers/filter_reducer';
+import { useProductsContext } from "./products_context";
 
 const FilterContext = React.createContext();
 
 const filterInitialState = {
-    all_products: [
-        {
-            id: 1,
-            name: "Kitchen",
-            price: "$123",
-            imageUrl: ""
-        },
-        {
-            id: 2,
-            name: "Office",
-            price: "$87",
-            imageUrl: ""
-        },
-        {
-            id: 3,
-            name: "Kids",
-            price: "$56",
-            imageUrl: ""
-        },
-        {
-            id: 4,
-            name: "Dining",
-            price: "$23",
-            imageUrl: ""
-        }
-    ],
-    filtered_products: [
-        {
-            id: 1,
-            name: "Kitchen",
-            price: "$123",
-            imageUrl: ""
-        },
-        {
-            id: 2,
-            name: "Office",
-            price: "$87",
-            imageUrl: ""
-        },
-        {
-            id: 3,
-            name: "Kids",
-            price: "$56",
-            imageUrl: ""
-        },
-        {
-            id: 4,
-            name: "Dining",
-            price: "$23",
-            imageUrl: ""
-        }
-    ],
+    all_products: [],
+    filtered_products: [],
     view: "grid",
     sort: "price-lowest",
     filters : {
@@ -72,8 +23,12 @@ const filterInitialState = {
 }
 
 export const FilterProvider = ({children}) => {
-
+    const {products} = useProductsContext();
     const [state, dispatch] = React.useReducer(filter_reducer, filterInitialState);
+
+    useEffect(() => {
+        dispatch({type: LOAD_PRODUCTS, payload: products});
+    },[products])
 
     useEffect(() => {
         dispatch({type: FILTER_PRODUCTS});
