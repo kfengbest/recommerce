@@ -4,12 +4,14 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from "react-router-dom";
-
+import {FilterProvider} from "./context/filter_context";
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <FilterProvider>
+        <App />
+      </FilterProvider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')

@@ -1,14 +1,21 @@
 import React from "react";
 import styled from "styled-components";
+import { useFilterContext } from "../context/filter_context";
 
 const Filters = () => {
 
-    const updateFilters = (e) => {
-        console.log(e);
-    }
+    const {
+        filters : {
+            searchText,
+            category,
+            company
+        },
+        updateFilters
+    } = useFilterContext();
 
     const categories = ["All", "Office", "Living Room", "Kitchen", "Bedroom", "Dining", "Kids"];
     const companies = ["ikea", "good"];
+
     return (
         <Wrapper>
             <div className="content">
@@ -16,7 +23,8 @@ const Filters = () => {
                     <div className="form-control">
                         <input 
                             type="text"
-                            name="text"
+                            name="searchText"
+                            value={searchText}
                             placeholder="search"
                             className="search-input"
                             onChange={updateFilters}
@@ -31,6 +39,7 @@ const Filters = () => {
                                         key={i}
                                         onClick={updateFilters}
                                         name="category"
+                                        value={category}
                                         type="button"
                                     >
                                         {c}
@@ -44,6 +53,7 @@ const Filters = () => {
                         <select
                             className="company"
                             name="company"
+                            value={company}
                             onChange={updateFilters}
                         >
                             {companies.map((c,i) => {
