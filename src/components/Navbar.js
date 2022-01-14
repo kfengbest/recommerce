@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
-import logo from "../assets/logo.png";
+import logo from "../assets/company-logo.jpg";
 
 const Nav = () => {
 
@@ -39,7 +39,7 @@ const NavContainer = styled.nav`
     align-items: center;
     justify-content: space-between;
     img {
-      width: 350px;
+      width: 200px;
       margin-left: -40px;
     }
   }

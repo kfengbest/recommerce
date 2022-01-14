@@ -8,7 +8,7 @@ const Filters = () => {
     }
 
     const categories = ["All", "Office", "Living Room", "Kitchen", "Bedroom", "Dining", "Kids"];
-
+    const companies = ["ikea", "good"];
     return (
         <Wrapper>
             <div className="content">
@@ -38,6 +38,20 @@ const Filters = () => {
                                 );
                             })}
                         </div>
+                    </div>
+                    <div className="form-control">
+                        <h5>Company</h5>
+                        <select
+                            className="company"
+                            name="company"
+                            onChange={updateFilters}
+                        >
+                            {companies.map((c,i) => {
+                                return (
+                                    <option key={i} value={c}>{c}</option>
+                                );
+                            })}
+                        </select>
                     </div>
                 </form>
             </div>
