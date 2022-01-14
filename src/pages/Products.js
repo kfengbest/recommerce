@@ -1,5 +1,7 @@
 import * as React from 'react';
+import styled from "styled-components";
 import GridView from '../components/GridView';
+import Filters from '../components/Filters';
 
 const productslist = [
     {
@@ -30,13 +32,27 @@ const productslist = [
 function Products() {
     return (
         <>
-            <main>
-                <h2>Product page</h2>
-                <p>this is Product page content</p>
-                <GridView products={productslist} />
-            </main>
+            <Wrapper>
+                <div className="section-center products">
+                    <Filters />
+                    <GridView products={productslist} />
+                </div>
+            </Wrapper>
         </>
     );
 }
+
+const Wrapper = styled.div`
+    .products {
+        display: grid;
+        gap: 3rem 1.5rem;
+        margin: 4rem auto;
+    }
+    @media (min-width: 550px) {
+        .products {
+        grid-template-columns: 200px 1fr;
+        }
+    }
+`;
 
 export default Products;
